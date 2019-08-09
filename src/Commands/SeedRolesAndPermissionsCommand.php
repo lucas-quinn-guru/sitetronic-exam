@@ -1,6 +1,6 @@
 <?php
 
-namespace LucasQuinnGuru\LaravelUser\Commands;
+namespace LucasQuinnGuru\SitetronicExam\Commands;
 
 use Illuminate\Console\Command;
 use App\Models\User;

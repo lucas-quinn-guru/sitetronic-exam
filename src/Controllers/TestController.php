@@ -1,6 +1,6 @@
 <?php
 
-namespace LucasQuinnGuru\SiteTronicExams\Controllers;
+namespace LucasQuinnGuru\SitetronicExam\Controllers;
 
 use Illuminate\Http\Request;
 

@@ -1,14 +1,14 @@
 <?php
 
-namespace LucasQuinnGuru\SitetronicExams;
+namespace LucasQuinnGuru\SitetronicExam;
 
 use Illuminate\Support\ServiceProvider;
 
-class SitetronicExamsServiceProvider extends ServiceProvider
+class SitetronicExamServiceProvider extends ServiceProvider
 {
 
     protected $commands = [
-        'LucasQuinnGuru\SitetronicExams\Commands\SeedRolesAndPermissionsCommand'
+        'LucasQuinnGuru\SitetronicExam\Commands\SeedRolesAndPermissionsCommand'
     ];
 
     /**
@@ -19,8 +19,8 @@ class SitetronicExamsServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/sitetronic_exams.php',
-            'sitetronic-exams'
+            __DIR__ . '/../config/sitetronic_exam.php',
+            'sitetronic-exam'
         );
 
         $this->commands($this->commands);
@@ -35,20 +35,20 @@ class SitetronicExamsServiceProvider extends ServiceProvider
     {
 
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'sitetronic-exams');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'sitetronic-exam');
 
         $this->app['router']
-            ->aliasMiddleware('isAdmin', \LucasQuinnGuru\SitetronicExams\Middleware\AdminMiddleware::class);
+            ->aliasMiddleware('isAdmin', \LucasQuinnGuru\SitetronicExam\Middleware\AdminMiddleware::class);
         $this->app['router']
-            ->aliasMiddleware('clearance', \LucasQuinnGuru\SitetronicExams\Middleware\ClearanceMiddleware::class);
+            ->aliasMiddleware('clearance', \LucasQuinnGuru\SitetronicExam\Middleware\ClearanceMiddleware::class);
 
 
         $this->publishes([
-            __DIR__ . '/../config/sitetronic-exams.php' => config_path('sitetronic-exams.php'),
-        ], 'sitetronic-exams-config');
+            __DIR__ . '/../config/sitetronic-exam.php' => config_path('sitetronic-exam.php'),
+        ], 'sitetronic-exam-config');
 
         $this->publishes([
-            __DIR__ . '/../resources/assets' => public_path('vendor/lucas-quinn-guru/sitetronic-exams'),
+            __DIR__ . '/../resources/assets' => public_path('vendor/lucas-quinn-guru/sitetronic-exam'),
         ], 'assets');
     }
 }
