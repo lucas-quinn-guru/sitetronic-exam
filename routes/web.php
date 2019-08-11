@@ -1,5 +1,6 @@
 <?php
 
-Route::group(['middleware'=>['web'], 'namespace' => 'LucasQuinnGuru\SitetronicExams\Controllers'], function () {
-    Route::resource('test', 'TestController');
+Route::group(['middleware'=>['web'], 'namespace' => 'LucasQuinnGuru\SitetronicExam\Controllers'], function () {
+    Route::resource('exam-administration', 'ExamAdminController');
+    Route::resource('admin/exam-section', 'ExamSectionAdminController');
 });

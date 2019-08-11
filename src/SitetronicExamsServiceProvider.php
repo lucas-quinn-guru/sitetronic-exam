@@ -19,7 +19,7 @@ class SitetronicExamServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/sitetronic_exam.php',
+            __DIR__ . '/../config/sitetronic-exam.php',
             'sitetronic-exam'
         );
 

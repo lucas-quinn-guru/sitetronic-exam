@@ -3,8 +3,9 @@
 namespace LucasQuinnGuru\SitetronicExam\Controllers;
 
 use Illuminate\Http\Request;
+use LucasQuinnGuru\SitetronicExam\Models\Section;
 
-class TestController extends Controller
+class ExamSectionAdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,9 @@ class TestController extends Controller
      */
     public function index()
     {
-        //
+        //Get all users and pass it to the view
+        $sections = Section::all();
+        return view('sitetronic-exam::section-admin.index')->with('sections', $sections);
     }
 
     /**
