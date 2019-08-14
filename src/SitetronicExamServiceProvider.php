@@ -1,14 +1,14 @@
 <?php
 
-namespace LucasQuinnGuru\SitetronicMisc;
+namespace LucasQuinnGuru\SitetronicExam;
 
 use Illuminate\Support\ServiceProvider;
 
-class SitetronicMiscServiceProvider extends ServiceProvider
+class SitetronicExamServiceProvider extends ServiceProvider
 {
 
     protected $commands = [
-        'LucasQuinnGuru\SitetronicMisc\Commands\SeedSectionsCommand'
+        'LucasQuinnGuru\SitetronicExam\Commands\SeedRolesAndPermissionsCommand'
     ];
 
     /**
@@ -28,7 +28,8 @@ class SitetronicMiscServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
+        $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'sitetronic-exam');
 
 
     }
