@@ -1,5 +1,5 @@
 {
-    "name": "lucas-quinn-guru/sitetronic-exam",
+    "name": "lucas-quinn-guru/sitetronic-misc",
     "description": "Front end user profile and settings page out of the box with user/role/permission management backend.",
     "type": "library",
     "license": "MIT",
@@ -16,13 +16,13 @@
     },
     "autoload": {
         "psr-4": {
-            "LucasQuinnGuru\\SitetronicExam\\": "src/"
+            "LucasQuinnGuru\\SitetronicMisc\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "LucasQuinnGuru\\SitetronicExam\\SitetronicExamServiceProvider"
+                "LucasQuinnGuru\\SitetronicMisc\\SitetronicMiscServiceProvider"
             ]
         }
     }
