@@ -28,7 +28,7 @@
 
                         <td>{{ $section->created_at->format('F d, Y h:ia') }}</td>
                         <td>
-                            <a href="{{ route('section-admin.edit', $section->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;">Edit</a>
+                            <a href="{{ route('admin.section.edit', $section->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;">Edit</a>
 
                             {!! Form::open(['method' => 'DELETE', 'route' => ['section-admin.destroy', $section->id] ]) !!}
                             {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
@@ -40,7 +40,7 @@
             </table>
         </div>
 
-        <a href="{{ route('section-admin.create') }}" class="btn btn-success">Add Section</a>
+        <a href="{{ route('admin.section.create') }}" class="btn btn-success">Add Section</a>
 
     </div>
 </div>
