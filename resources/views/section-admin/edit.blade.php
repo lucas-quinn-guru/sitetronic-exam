@@ -32,8 +32,8 @@
 
     </div>
 
-    @if( $topics->count() < 0 )
-    <div class="col-lg-10 col-lg-offset-1">
+    @if( $topics->count() > 0 )
+    <div class="col-lg-12">
         <h1>
             <i class="fa fa-users"></i> Exam Administration - Topics
         </h1>
@@ -60,7 +60,6 @@
 
                             {!! Form::open(['method' => 'DELETE', 'route' => ['admin.exam-topic.destroy', $topic->id] ]) !!}
                             <a href="{{ route('admin.exam-topic.edit', $topic->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;">Edit</a>
-
                             {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                             {!! Form::close() !!}
                         </td>

@@ -60,7 +60,9 @@ class ExamSectionAdminController extends Controller
     public function edit($id)
     {
         $section = Section::findOrFail($id); //Get user with specified id
-        $topics = $section->topics();
+        $topics = $section->topics()->get();
+
+        //dd(  $topics->count() );
         return view('sitetronic-exam::section-admin.edit', compact('section', 'topics' )); //pass user and roles data to view
     }
 
