@@ -6,6 +6,6 @@
 <div class="container">
     Hello
 
-    <a href='/admin/section-admin'>Exam Sections</a>
+    <a href='/admin/exam-section'>Exam Sections</a>
 </div>
 @endsection
