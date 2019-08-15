@@ -4,7 +4,7 @@ namespace LucasQuinnGuru\SitetronicExam\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Section extends Model
+class Topic extends Model
 {
     protected $guarded = [];
 
@@ -20,8 +20,8 @@ class Section extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function topics()
+    public function section()
     {
-        return $this->hasMany(\LucasQuinnGuru\SitetronicExam\Models\Topic::class);
+        return $this->belongsTo(\LucasQuinnGuru\SitetronicExam\Models\Section::class);
     }
 }
