@@ -1,21 +1,19 @@
-{{-- \resources\views\users\edit.blade.php --}}
+{{-- \resources\views\topic-admin\edit.blade.php --}}
 
 @extends('layouts.default.master')
 
-@section('title', 'Edit Exam Section')
+@section('title', 'Edit Exam Topic')
 
 @section('content')
 <div class="container">
     <h1>
-        <i class='fa fa-user-plus'></i> Edit {{$section->name}}
+        <i class='fa fa-user-plus'></i> Add Exam Topic
     </h1>
     <hr>
     <div class='col-lg-6 col-lg-offset-4'>
 
-
         {{-- Form model binding to automatically populate our fields with user data --}}
-        {{ Form::model($section, array('route' => [ 'admin.exam-section.update', $section->id ], 'method' => 'PUT')) }}
-
+        {{ Form::model($topic, [ 'route' => [ 'admin.exam-topic.update', "id"=>$topic->id ], 'method' => 'PUT' ]) }}
         <div class="form-group">
             {{ Form::label('name', 'Name') }}
             {{ Form::text('name', null, array('class' => 'form-control')) }}
@@ -31,17 +29,16 @@
             {{ Form::select('active', ['0' => 'No', '1' => 'Yes'], null, ['class'=>'form-control'] ) }}
         </div>
 
-        {{ Form::submit('Update', array('class' => 'btn btn-success btn-lg btn-block')) }}
-        <a href='/admin/exam-topic/create/{{$section->id}}' class='btn btn-primary btn-lg btn-block'>Create New Topic</a>
-        <a href='/admin/exam-section' class='btn btn-primary btn-lg btn-block'>Back to Sections</a>
+        {{ Form::submit('Update Topic', array('class' => 'btn btn-success btn-lg btn-block')) }}
+        <a href='/admin/exam-section/{{ $section->id }}' class='btn btn-primary btn-lg btn-block'>Back to Section</a>
         {{ Form::close() }}
 
     </div>
     <br>
-    @if( $topics->count() > 0 )
+    @if( isset( $questions ) && $questions->count() > 0 )
     <div class="col-lg-12">
         <h1>
-            <i class="fa fa-users"></i> Exam Administration - Topics
+            <i class="fa fa-users"></i> Exam Administration - Questions
         </h1>
         <hr>
         <div class="table-responsive">
@@ -49,23 +46,23 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Topic</th>
+                        <th>Question</th>
                         <th>Date/Time Added</th>
                         <th>Operations</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    @foreach ($topics as $topic)
+                    @foreach ($questions as $question)
                     <tr>
-                        <td>{{ $topic->id }}</td>
-                        <td>{{ $topic->name }}</td>
+                        <td>{{ $question->id }}</td>
+                        <td>{{ $question->name }}</td>
 
-                        <td>{{ $topic->created_at->format('F d, Y h:ia') }}</td>
+                        <td>{{ $question->created_at->format('F d, Y h:ia') }}</td>
                         <td>
 
-                            {!! Form::open(['method' => 'DELETE', 'route' => ['admin.exam-topic.destroy', $topic->id] ]) !!}
-                            <a href="{{ route('admin.exam-topic.edit', $topic->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;">Edit</a>
+                            {!! Form::open(['method' => 'DELETE', 'route' => ['admin.exam-question.destroy', $question->id] ]) !!}
+                            <a href="{{ route('admin.exam-question.edit', $question->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;">Edit</a>
                             {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                             {!! Form::close() !!}
                         </td>

@@ -4,19 +4,22 @@ namespace LucasQuinnGuru\SitetronicExam\Controllers;
 
 use Illuminate\Http\Request;
 use LucasQuinnGuru\SitetronicExam\Models\Section;
+use LucasQuinnGuru\SitetronicExam\Models\Topic;
 
-class ExamSectionAdminController extends Controller
+class ExamTopicAdminController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Section $section)
     {
         //Get all users and pass it to the view
-        $sections = Section::all();
-        return view('sitetronic-exam::section-admin.index')->with('sections', $sections);
+        $topics= Topic::all();
+        return view('sitetronic-exam::topic-admin.index')
+            ->with('topics', $topics)
+            ->with('section', $section );
     }
 
     /**
@@ -24,9 +27,10 @@ class ExamSectionAdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create( Section $section)
     {
-        //
+        return view('sitetronic-exam::topic-admin.create')
+            ->with('section', $section );;
     }
 
     /**
@@ -35,9 +39,25 @@ class ExamSectionAdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Section $section)
     {
-        //
+        $this->validate($request, [
+            'name'=>'required',
+            'slug'=>'required',
+            'active'=>'required'
+        ]);
+
+        $topic = new Topic();
+        $topic->section_id = $section->id;
+        $topic->name = $request->name;
+        $topic->slug = $request->slug;
+        $topic->active = $request->active;
+        $topic->save();
+
+        return redirect()
+            ->route('admin.exam-section.edit', $section->id)
+            ->with('flash_message',  'Topic: '. $topic->name . ' added');
+
     }
 
     /**
@@ -59,11 +79,14 @@ class ExamSectionAdminController extends Controller
      */
     public function edit($id)
     {
-        $section = Section::findOrFail($id); //Get user with specified id
-        $topics = $section->topics()->get();
 
-        //dd(  $topics->count() );
-        return view('sitetronic-exam::section-admin.edit', compact('section', 'topics' )); //pass user and roles data to view
+
+        $topic = Topic::findOrFail($id); //Get user with specified id
+        $section = $topic->section;
+        $questions = $topic->questions()->get();
+
+
+        return view('sitetronic-exam::topic-admin.edit', compact('topic', 'section', 'question' )); //pass user and roles data to view
     }
 
     /**

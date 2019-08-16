@@ -3,9 +3,12 @@
 namespace LucasQuinnGuru\SitetronicExam\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Topic extends Model
 {
+    use SoftDeletes;
+
     protected $guarded = [];
 
     /**
@@ -23,5 +26,13 @@ class Topic extends Model
     public function section()
     {
         return $this->belongsTo(\LucasQuinnGuru\SitetronicExam\Models\Section::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function questions()
+    {
+        return $this->hasMany(\LucasQuinnGuru\SitetronicExam\Models\Question::class);
     }
 }

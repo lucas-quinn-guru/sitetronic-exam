@@ -5,7 +5,7 @@ namespace LucasQuinnGuru\SitetronicExam\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Section extends Model
+class Question extends Model
 {
     use SoftDeletes;
 
@@ -23,8 +23,8 @@ class Section extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
-    public function topics()
+    public function topic()
     {
-        return $this->hasMany(\LucasQuinnGuru\SitetronicExam\Models\Topic::class);
+        return $this->belongsTo(\LucasQuinnGuru\SitetronicExam\Models\Topic::class);
     }
 }
