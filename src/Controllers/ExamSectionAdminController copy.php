@@ -37,7 +37,19 @@ class ExamSectionAdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name'=>'required',
+            'active'=>'required'
+        ]);
+
+        $section = new Section();
+        $section->name = $request->name;
+        $section->active = $request->active;
+        $section->save();
+
+        return redirect()
+            ->route('admin.exam-section.index' )
+            ->with('flash_message',  'Section: '. $section->name . ' added');
     }
 
     /**
@@ -78,7 +90,6 @@ class ExamSectionAdminController extends Controller
     {
         $this->validate($request, [
             'name'=>'required',
-            'slug'=>'required',
             'active'=>'required'
         ]);
 

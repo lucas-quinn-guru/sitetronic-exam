@@ -21,11 +21,6 @@
         </div>
 
         <div class="form-group">
-            {{ Form::label('slug', 'Slug') }}
-            {{ Form::text('slug', null, array('class' => 'form-control')) }}
-        </div>
-
-        <div class="form-group">
             {{ Form::label('active', 'Active') }}
             {{ Form::select('active', ['0' => 'No', '1' => 'Yes'], null, ['class'=>'form-control'] ) }}
         </div>

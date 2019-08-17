@@ -6,9 +6,9 @@
 
 @section('content')
 <div class="container">
-    <h1>
-        <i class='fa fa-user-plus'></i> Edit {{$section->name}}
-    </h1>
+    <h2>
+        <i class='fa fa-user-plus'></i> Edit Section - {{$section->name}}
+    </h2>
     <hr>
     <div class='col-lg-6 col-lg-offset-4'>
 
@@ -22,8 +22,8 @@
         </div>
 
         <div class="form-group">
-            {{ Form::label('slug', 'Slug') }}
-            {{ Form::text('slug', null, array('class' => 'form-control')) }}
+            <label for="slug">Slug</label>
+            <span class="form-control" id="slug">{{$section->slug}}</span>
         </div>
 
         <div class="form-group">
@@ -62,7 +62,7 @@
                         <td>{{ $topic->name }}</td>
 
                         <td>{{ $topic->created_at->format('F d, Y h:ia') }}</td>
-                        <td>
+                        <td style='width:160px;'>
 
                             {!! Form::open(['method' => 'DELETE', 'route' => ['admin.exam-topic.destroy', $topic->id] ]) !!}
                             <a href="{{ route('admin.exam-topic.edit', $topic->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;">Edit</a>

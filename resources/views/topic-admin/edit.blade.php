@@ -7,7 +7,7 @@
 @section('content')
 <div class="container">
     <h1>
-        <i class='fa fa-user-plus'></i> Add Exam Topic
+        <i class='fa fa-user-plus'></i> Edit Exam Topic
     </h1>
     <hr>
     <div class='col-lg-6 col-lg-offset-4'>
@@ -20,8 +20,8 @@
         </div>
 
         <div class="form-group">
-            {{ Form::label('slug', 'Slug') }}
-            {{ Form::text('slug', null, array('class' => 'form-control')) }}
+            <label for="slug">Slug</label>
+            <span class="form-control" id="slug">{{$topic->slug}}</span>
         </div>
 
         <div class="form-group">
@@ -46,8 +46,11 @@
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>#</th>
                         <th>Question</th>
-                        <th>Date/Time Added</th>
+                        <th>Review</th>
+                        <th>Broker</th>
+                        <th>Has Issue</th>
                         <th>Operations</th>
                     </tr>
                 </thead>
@@ -56,10 +59,24 @@
                     @foreach ($questions as $question)
                     <tr>
                         <td>{{ $question->id }}</td>
-                        <td>{{ $question->name }}</td>
-
-                        <td>{{ $question->created_at->format('F d, Y h:ia') }}</td>
-                        <td>
+                        <td>{{ $question->question_number}}
+                        <td>{{ $question->question }}</td>
+                        <td class='text-center'>
+                            @if( $question->is_review == 1  )
+                                <i class='fas fa-check'></i>
+                            @endif
+                        </td>
+                        <td class='text-center'>
+                            @if( $question->is_broker == 1 )
+                                <i class='fas fa-check'></i>
+                            @endif
+                        </td>
+                        <td class='text-center'>
+                            @if( $question->problem_notification == 1 )
+                                <i class='fas fa-check'></i>
+                            @endif
+                        </td>
+                        <td style="width:160px;">
 
                             {!! Form::open(['method' => 'DELETE', 'route' => ['admin.exam-question.destroy', $question->id] ]) !!}
                             <a href="{{ route('admin.exam-question.edit', $question->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;">Edit</a>

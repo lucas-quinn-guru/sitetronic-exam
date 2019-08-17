@@ -5,6 +5,7 @@ Route::group(['middleware'=>['web'], 'namespace' => 'LucasQuinnGuru\SitetronicEx
         Route::resource('exam', 'ExamAdminController');
         Route::resource('exam-section', 'ExamSectionAdminController');
         Route::resource('exam-topic', 'ExamTopicAdminController');
+        Route::resource('exam-question', 'ExamQuestionAdminController');
 
         Route::get( 'exam-topic/create/{section}', 'ExamTopicAdminController@create')->name( 'exam-topic.create' );
         Route::post( 'exam-topic/{section}', 'ExamTopicAdminController@store')->name( 'exam-topic.store' );

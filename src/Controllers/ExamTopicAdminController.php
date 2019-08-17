@@ -16,7 +16,7 @@ class ExamTopicAdminController extends Controller
     public function index(Section $section)
     {
         //Get all users and pass it to the view
-        $topics= Topic::all();
+        $topics = Topic::all();
         return view('sitetronic-exam::topic-admin.index')
             ->with('topics', $topics)
             ->with('section', $section );
@@ -43,14 +43,12 @@ class ExamTopicAdminController extends Controller
     {
         $this->validate($request, [
             'name'=>'required',
-            'slug'=>'required',
             'active'=>'required'
         ]);
 
         $topic = new Topic();
         $topic->section_id = $section->id;
         $topic->name = $request->name;
-        $topic->slug = $request->slug;
         $topic->active = $request->active;
         $topic->save();
 
@@ -86,7 +84,7 @@ class ExamTopicAdminController extends Controller
         $questions = $topic->questions()->get();
 
 
-        return view('sitetronic-exam::topic-admin.edit', compact('topic', 'section', 'question' )); //pass user and roles data to view
+        return view('sitetronic-exam::topic-admin.edit', compact('topic', 'section', 'questions' )); //pass user and roles data to view
     }
 
     /**
