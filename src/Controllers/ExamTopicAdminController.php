@@ -81,7 +81,7 @@ class ExamTopicAdminController extends Controller
 
         $topic = Topic::findOrFail($id); //Get user with specified id
         $section = $topic->section;
-        $questions = $topic->questions()->get();
+        $questions = $topic->questions()->orderBy('question_number')->get();
 
 
         return view('sitetronic-exam::topic-admin.edit', compact('topic', 'section', 'questions' )); //pass user and roles data to view
