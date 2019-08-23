@@ -7,7 +7,7 @@
 @section('content')
 <div class="container">
     <h1>
-        <i class='fa fa-user-plus'></i> Add Exam Topic
+        <i class='fa fa-user-plus'></i> Edit Exam Question
     </h1>
     <hr>
     <div class='col-lg-6 col-lg-offset-4'>

@@ -40,4 +40,12 @@ class Question extends Model
     {
         return $this->belongsTo(\LucasQuinnGuru\SitetronicExam\Models\Topic::class);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function answers()
+    {
+        return $this->hasMany(\LucasQuinnGuru\SitetronicExam\Models\Answer::class);
+    }
 }
