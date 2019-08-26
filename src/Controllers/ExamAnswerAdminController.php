@@ -57,7 +57,10 @@ class ExamAnswerAdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        $answer = Answer::findOrFail($id); //Get user with specified id
+        $question= $answer->question;
+
+        return view('sitetronic-exam::answer-admin.edit', compact( 'answer', 'question' )); //pass user and roles data to view
     }
 
     /**
@@ -69,7 +72,20 @@ class ExamAnswerAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'answer'=>'required',
+            'correct'=>'required'
+        ]);
+
+        $answer = Answer::findOrFail($id);
+        $answer->answer = $request->input('answer');
+        $answer->correct = $request->input('correct');
+        $answer->definition = $request->input('definition');
+        $answer->save();
+
+        return redirect()
+            ->route('admin.exam-question.edit', $answer->question->id)
+            ->with('flash_message',  'Answer updated');
     }
 
     /**
