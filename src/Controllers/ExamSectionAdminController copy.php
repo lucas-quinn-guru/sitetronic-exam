@@ -98,7 +98,7 @@ class ExamSectionAdminController extends Controller
         $section->save();
 
         return redirect()
-            ->route('admin.exam-section.edit', $section->id)
+            ->route('admin.exam-topic.index', $section->id)
             ->with('flash_message',  'Section: '. $section->name . ' updated');
     }
 

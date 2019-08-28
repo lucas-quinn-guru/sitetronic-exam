@@ -8,8 +8,9 @@
     <div class="col-lg-12">
         <h1>
             <i class="fa fa-users"></i> Exam Administration - Topics
-        <small class="text-muted"><a href='/admin/exam-section/{{$section->id}}/edit'><i class="fas fa-cog"></i></a></small>
+            <small class="text-muted"><a href='/admin/exam-section/{{$section->id}}/edit'><i class="fas fa-cog"></i></a></small>
         </h1>
+        Section: {{$section->name}}
         <hr>
         <div class="table-responsive">
             <table class="table table-bordered table-striped">
@@ -29,10 +30,10 @@
                         <td>{{ $topic->name }}</td>
 
                         <td>{{ $topic->created_at->format('F d, Y h:ia') }}</td>
-                        <td style='width:160px;'>
+                        <td style='width:210px;'>
 
                             {!! Form::open(['method' => 'DELETE', 'route' => ['admin.exam-topic.destroy', $topic->id] ]) !!}
-                            <a href="{{ route('admin.exam-topic.edit', $topic->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;">Edit</a>
+                            <a href="{{ route('admin.exam-question.index', $topic->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;">Questions</a>
                             {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                             {!! Form::close() !!}
                         </td>
