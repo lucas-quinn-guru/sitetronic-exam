@@ -16,7 +16,7 @@ class ExamTopicAdminController extends Controller
     public function index(Section $section)
     {
         //Get all users and pass it to the view
-        $topics = Topic::all();
+        $topics = $section->topics;
         return view('sitetronic-exam::topic-admin.index')
             ->with('topics', $topics)
             ->with('section', $section );
