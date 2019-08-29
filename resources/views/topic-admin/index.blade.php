@@ -8,9 +8,8 @@
     <div class="col-lg-12">
         <h1>
             <i class="fa fa-users"></i> Exam Administration - Topics
-            <small class="text-muted"><a href='/admin/exam-section/{{$section->id}}/edit'><i class="fas fa-cog"></i></a></small>
         </h1>
-        Section: {{$section->name}}
+        Section: {{$section->name}} <small class="text-muted"><a href='/admin/exam-section/{{$section->id}}/edit'><i class="fas fa-cog"></i></a></small>
         <hr>
         <div class="table-responsive">
             <table class="table table-bordered table-striped">

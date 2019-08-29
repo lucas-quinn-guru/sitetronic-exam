@@ -9,6 +9,7 @@
     <h1>
         <i class='fa fa-user-plus'></i> Edit Exam Answer
     </h1>
+    Question: {{$answer->question->question}}
     <hr>
     <div class='col-lg-6 col-lg-offset-4'>
 

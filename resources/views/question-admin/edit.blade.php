@@ -9,6 +9,7 @@
     <h1>
         <i class='fa fa-user-plus'></i> Edit Exam Question
     </h1>
+    Topic: {{$question->topic->name}}
     <hr>
     <div class='col-lg-6 col-lg-offset-4'>
 
@@ -35,66 +36,16 @@
         </div>
 
         <div class="form-group">
-                {{ Form::label('problem_notification', 'Has Problem') }}
-                {{ Form::select('problem_notification', ['0' => 'No', '1' => 'Yes'], null, ['class'=>'form-control'] ) }}
-            </div>
+            {{ Form::label('problem_notification', 'Has Problem') }}
+            {{ Form::select('problem_notification', ['0' => 'No', '1' => 'Yes'], null, ['class'=>'form-control'] ) }}
+        </div>
 
         {{ Form::submit('Update Question', array('class' => 'btn btn-success btn-lg btn-block')) }}
-        <a href='/admin/exam-topic/{{ $topic->id }}' class='btn btn-primary btn-lg btn-block'>Back to Topic</a>
+        <a href='/admin/exam-question/index/{{ $topic->id }}' class='btn btn-primary btn-lg btn-block'>Back to Questions</a>
         {{ Form::close() }}
 
     </div>
     <br>
-    @if( isset( $answers ) && $answers->count() > 0 )
-    <div class="col-lg-12">
-        <h1>
-            <i class="fa fa-users"></i> Exam Administration - Answers
-        </h1>
-        <hr>
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>ID</th>
-                        <th>Answer</th>
-                        <th>Correct</th>
-                        <th>Operations</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    @php
-                    $answer_count = 0;
-                    @endphp
-                    @foreach ($answers as $answer)
-                    @php
-                    $answer_count++;
-                    @endphp
-                    <tr>
-                        <td>{{ $answer_count}}</td>
-                        <td>{{ $answer->id }}</td>
-                        <td>{{ $answer->answer }}</td>
-
-                        <td class='text-center'>
-                            @if( $answer->correct== 1  )
-                                <i class='fas fa-check'></i>
-                            @endif
-                        </td>
-                        <td>
-
-                            {!! Form::open(['method' => 'DELETE', 'route' => ['admin.exam-answer.destroy', $answer->id] ]) !!}
-                            <a href="{{ route('admin.exam-answer.edit', $answer->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;">Edit</a>
-                            {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
-                            {!! Form::close() !!}
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
-    @endif
 </div>
 
 @endsection

@@ -93,7 +93,6 @@ class ExamSectionAdminController extends Controller
 
         $section = Section::findOrFail($id);
         $section->name = $request->input('name');
-        $section->slug = $request->input('slug');
         $section->active = $request->input('active');
         $section->save();
 

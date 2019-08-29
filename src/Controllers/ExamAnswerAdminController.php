@@ -4,6 +4,7 @@ namespace LucasQuinnGuru\SitetronicExam\Controllers;
 
 use Illuminate\Http\Request;
 use LucasQuinnGuru\SitetronicExam\Models\Answer;
+use LucasQuinnGuru\SitetronicExam\Models\Question;
 
 class ExamAnswerAdminController extends Controller
 {
@@ -12,9 +13,13 @@ class ExamAnswerAdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Question $question )
     {
-        //
+        //Get all answeers and pass it to the view
+        $answers = $question->answers;
+        return view('sitetronic-exam::answer-admin.index')
+            ->with('question', $question)
+            ->with('answers', $answers );
     }
 
     /**

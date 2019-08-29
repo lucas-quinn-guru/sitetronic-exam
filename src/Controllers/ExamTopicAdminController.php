@@ -77,12 +77,9 @@ class ExamTopicAdminController extends Controller
      */
     public function edit($id)
     {
-
-
         $topic = Topic::findOrFail($id); //Get user with specified id
         $section = $topic->section;
         $questions = $topic->questions()->orderBy('question_number')->get();
-
 
         return view('sitetronic-exam::topic-admin.edit', compact('topic', 'section', 'questions' )); //pass user and roles data to view
     }
@@ -96,7 +93,19 @@ class ExamTopicAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name'=>'required',
+            'active'=>'required'
+        ]);
+
+        $topic = Topic::findOrFail($id);
+        $topic->name = $request->input('name');
+        $topic->active = $request->input('active');
+        $topic->save();
+
+        return redirect()
+            ->route('admin.exam-question.index', $topic->id)
+            ->with('flash_message',  'Topic: '. $topic->name . ' updated');
     }
 
     /**

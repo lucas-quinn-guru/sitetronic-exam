@@ -1,6 +1,6 @@
 @extends('layouts.default.master')
 
-@section('title', 'Question Admin')
+@section('title', 'Answer Admin')
 
 @section('content')
 <div class="container">
@@ -9,7 +9,7 @@
         <h1>
             <i class="fa fa-users"></i> Exam Administration - Questions
         </h1>
-        Topic: {{$topic->name}} <small class="text-muted"><a href='/admin/exam-topic/{{$topic->id}}/edit'><i class="fas fa-cog"></i></a></small>
+        Topic: {{$question->question}} <small class="text-muted"><a href='/admin/exam-topic/{{$topic->id}}/edit'><i class="fas fa-cog"></i></a></small>
         <hr>
         <div class="table-responsive">
             <table class="table table-bordered table-striped">
@@ -49,7 +49,7 @@
                         <td style="width:160px;">
 
                             {!! Form::open(['method' => 'DELETE', 'route' => ['admin.exam-question.destroy', $question->id] ]) !!}
-                            <a href="{{ route('admin.exam-answer.index', $question->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;">Edit</a>
+                            <a href="{{ route('admin.exam-question.edit', $question->id) }}" class="btn btn-info pull-left" style="margin-right: 3px;">Edit</a>
                             {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                             {!! Form::close() !!}
                         </td>
