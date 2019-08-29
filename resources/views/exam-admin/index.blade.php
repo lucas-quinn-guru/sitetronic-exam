@@ -4,7 +4,8 @@
 
 @section('content')
 <div class="container">
-    Hello
+
+    {{ Breadcrumbs::render('sitetronic-exam-admin-index') }}
 
     <a href='/admin/exam-section'>Exam Sections</a>
 </div>

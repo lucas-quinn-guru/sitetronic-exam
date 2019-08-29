@@ -78,7 +78,24 @@ class ExamQuestionAdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'question'=>'required',
+            'question_number'=>'required',
+            'is_review'=>'required',
+            'is_broker'=>'required'
+        ]);
+
+        $question = Question::findOrFail($id);
+        $question->question = $request->input('question');
+        $question->question_number = $request->input('question_number');
+        $question->is_review = $request->input('is_review');
+        $question->is_broker = $request->input('is_broker');
+        $question->problem_notification = $request->input('problem_notification');
+        $question->save();
+
+        return redirect()
+            ->route('admin.exam-question.index', $question->topic )
+            ->with('flash_message',  'Question updated');
     }
 
     /**

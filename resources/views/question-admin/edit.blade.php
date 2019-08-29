@@ -22,7 +22,7 @@
 
         <div class="form-group">
             {{ Form::label('question_number', 'Question Number') }}
-            <span class="form-control" id="question_number">{{$question->question_number}}</span>
+            {{ Form::text('question_number', null, [ 'class' => 'form-control' ]) }}
         </div>
 
         <div class="form-group">

@@ -20,4 +20,8 @@ Route::group(['middleware'=>['web'], 'namespace' => 'LucasQuinnGuru\SitetronicEx
         Route::get( 'exam-answer/index/{question}', 'ExamAnswerAdminController@index' )->name( 'exam-answer.index' );
 
     });
+
+
+
+
 });
