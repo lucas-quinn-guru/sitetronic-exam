@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
     {{ Breadcrumbs::render('sitetronic-exam-section-index') }}
-    <div class="col-lg-10 col-lg-offset-1">
+
         <h1>
             <i class="fa fa-users"></i> Exam Administration - Sections
         </h1>
@@ -16,6 +16,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
+                        <th>Active</th>
                         <th>Date/Time Added</th>
                         <th>Operations</th>
                     </tr>
@@ -26,7 +27,11 @@
                     <tr>
                         <td>{{ $section->id }}</td>
                         <td>{{ $section->name }}</td>
-
+                        <td class='text-center'>
+                            @if( $section->active == 1  )
+                                <i class='fas fa-check'></i>
+                            @endif
+                        </td>
                         <td>{{ $section->created_at->format('F d, Y h:ia') }}</td>
                         <td>
 
@@ -42,9 +47,8 @@
             </table>
         </div>
 
-        <a href="{{ route('admin.exam-section.create') }}" class="btn btn-success">Add Section</a>
+        <a href="{{ route('admin.exam-section.create') }}" class="btn btn-primary btn-lg btn-block">Add Section</a>
 
-    </div>
 </div>
 
 @endsection

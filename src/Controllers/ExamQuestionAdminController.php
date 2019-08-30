@@ -17,9 +17,12 @@ class ExamQuestionAdminController extends Controller
     {
         //Get all users and pass it to the view
         $questions = $topic->questions;
+        $section = $topic->section;
+
         return view('sitetronic-exam::question-admin.index')
             ->with('topic', $topic)
-            ->with('questions', $questions );
+            ->with('questions', $questions )
+            ->with('section', $section );
     }
 
     /**
@@ -65,8 +68,9 @@ class ExamQuestionAdminController extends Controller
         $question = Question::findOrFail($id); //Get user with specified id
         $topic= $question->topic;
         $answers = $question->answers()->get();
+        $section = $topic->section;
 
-        return view('sitetronic-exam::question-admin.edit', compact('question', 'topic', 'answers' )); //pass user and roles data to view
+        return view('sitetronic-exam::question-admin.edit', compact('question', 'topic', 'answers', 'section' )); //pass user and roles data to view
     }
 
     /**
@@ -94,7 +98,7 @@ class ExamQuestionAdminController extends Controller
         $question->save();
 
         return redirect()
-            ->route('admin.exam-question.index', $question->topic )
+            ->route('admin.exam-answer.index', $question->id )
             ->with('flash_message',  'Question updated');
     }
 

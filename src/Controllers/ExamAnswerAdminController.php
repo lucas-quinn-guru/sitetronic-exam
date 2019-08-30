@@ -17,9 +17,13 @@ class ExamAnswerAdminController extends Controller
     {
         //Get all answeers and pass it to the view
         $answers = $question->answers;
+        $topic = $question->topic;
+        $section = $topic->section;
         return view('sitetronic-exam::answer-admin.index')
-            ->with('question', $question)
-            ->with('answers', $answers );
+            ->with( 'question', $question )
+            ->with( 'answers', $answers )
+            ->with( 'topic', $topic )
+            ->with( 'section', $section );
     }
 
     /**
@@ -63,9 +67,12 @@ class ExamAnswerAdminController extends Controller
     public function edit($id)
     {
         $answer = Answer::findOrFail($id); //Get user with specified id
-        $question= $answer->question;
+        $question = $answer->question;
+        $topic = $question->topic;
+        $section = $topic->section;
 
-        return view('sitetronic-exam::answer-admin.edit', compact( 'answer', 'question' )); //pass user and roles data to view
+        return view('sitetronic-exam::answer-admin.edit',
+            compact( 'answer', 'question', 'topic', 'section' )); //pass user and roles data to view
     }
 
     /**

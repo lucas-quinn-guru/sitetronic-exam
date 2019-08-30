@@ -6,6 +6,7 @@
 
 @section('content')
 <div class="container">
+    {{ Breadcrumbs::render('sitetronic-exam-admin-question-edit', $topic, $section, $question) }}
     <h1>
         <i class='fa fa-user-plus'></i> Edit Exam Question
     </h1>

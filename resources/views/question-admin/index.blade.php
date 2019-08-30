@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container">
-
+    {{ Breadcrumbs::render('sitetronic-exam-admin-question-index', $topic, $section) }}
     <div class="col-lg-12">
         <h1>
             <i class="fa fa-users"></i> Exam Administration - Questions

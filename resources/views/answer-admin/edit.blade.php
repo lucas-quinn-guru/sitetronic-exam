@@ -6,14 +6,13 @@
 
 @section('content')
 <div class="container">
-    {{ Breadcrumbs::render('sitetronic-exam-answer-admin-edit') }}
+    {{ Breadcrumbs::render('sitetronic-exam-answer-admin-edit', $answer, $question, $section, $topic) }}
     <h1>
         <i class='fa fa-user-plus'></i> Edit Exam Answer
     </h1>
     Question: {{$answer->question->question}}
     <hr>
     <div class='col-lg-6 col-lg-offset-4'>
-
         {{-- Form model binding to automatically populate our fields with user data --}}
         {{ Form::model($answer, [ 'route' => [ 'admin.exam-answer.update', "id"=>$answer->id ], 'method' => 'PUT' ]) }}
         <div class="form-group">

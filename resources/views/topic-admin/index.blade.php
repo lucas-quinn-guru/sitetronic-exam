@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container">
-
+    {{ Breadcrumbs::render('sitetronic-exam-admin-topic-index', $section) }}
     <div class="col-lg-12">
         <h1>
             <i class="fa fa-users"></i> Exam Administration - Topics
@@ -17,6 +17,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Topic</th>
+                        <th>Active</th>
                         <th>Date/Time Added</th>
                         <th>Operations</th>
                     </tr>
@@ -27,7 +28,11 @@
                     <tr>
                         <td>{{ $topic->id }}</td>
                         <td>{{ $topic->name }}</td>
-
+                        <td class='text-center'>
+                            @if( $topic->active == 1  )
+                                <i class='fas fa-check'></i>
+                            @endif
+                        </td>
                         <td>{{ $topic->created_at->format('F d, Y h:ia') }}</td>
                         <td style='width:210px;'>
 
