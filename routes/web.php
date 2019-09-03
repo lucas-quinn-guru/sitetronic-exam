@@ -23,5 +23,9 @@ Route::group(['middleware'=>['web'], 'namespace' => 'LucasQuinnGuru\SitetronicEx
 
 
 
+    Route::resource('exam', 'ExamController');
+
+
+
 
 });

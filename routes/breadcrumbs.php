@@ -36,3 +36,10 @@ Breadcrumbs::for('sitetronic-exam-answer-admin-edit', function ($trail, $answer,
     $trail->parent('sitetronic-exam-admin-answer-index', $question, $topic, $section);
     $trail->push('Answer Edit', route('admin.exam-answer.edit', $answer->id));
 });
+
+
+
+Breadcrumbs::for('sitetronic-exam-index', function ( $trail ) {
+    $trail->parent('home');
+    $trail->push('Exams', route('exam.index'));
+});
