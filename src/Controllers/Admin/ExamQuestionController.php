@@ -1,29 +1,29 @@
 <?php
 
-namespace LucasQuinnGuru\SitetronicExam\Controllers;
+namespace LucasQuinnGuru\SitetronicExam\Controllers\admin;
 
 use Illuminate\Http\Request;
-use LucasQuinnGuru\SitetronicExam\Models\Answer;
+use LucasQuinnGuru\SitetronicExam\Controllers\Controller;
+use LucasQuinnGuru\SitetronicExam\Models\Topic;
 use LucasQuinnGuru\SitetronicExam\Models\Question;
 
-class ExamAnswerAdminController extends Controller
+class ExamQuestionController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Question $question )
+    public function index( Topic $topic )
     {
-        //Get all answeers and pass it to the view
-        $answers = $question->answers;
-        $topic = $question->topic;
+        //Get all users and pass it to the view
+        $questions = $topic->questions;
         $section = $topic->section;
-        return view('sitetronic-exam::answer-admin.index')
-            ->with( 'question', $question )
-            ->with( 'answers', $answers )
-            ->with( 'topic', $topic )
-            ->with( 'section', $section );
+
+        return view('sitetronic-exam::admin.question.index')
+            ->with('topic', $topic)
+            ->with('questions', $questions )
+            ->with('section', $section );
     }
 
     /**
@@ -66,13 +66,12 @@ class ExamAnswerAdminController extends Controller
      */
     public function edit($id)
     {
-        $answer = Answer::findOrFail($id); //Get user with specified id
-        $question = $answer->question;
-        $topic = $question->topic;
+        $question = Question::findOrFail($id); //Get user with specified id
+        $topic= $question->topic;
+        $answers = $question->answers()->get();
         $section = $topic->section;
 
-        return view('sitetronic-exam::answer-admin.edit',
-            compact( 'answer', 'question', 'topic', 'section' )); //pass user and roles data to view
+        return view('sitetronic-exam::admin.question.edit', compact('question', 'topic', 'answers', 'section' )); //pass user and roles data to view
     }
 
     /**
@@ -85,19 +84,23 @@ class ExamAnswerAdminController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'answer'=>'required',
-            'correct'=>'required'
+            'question'=>'required',
+            'question_number'=>'required',
+            'is_review'=>'required',
+            'is_broker'=>'required'
         ]);
 
-        $answer = Answer::findOrFail($id);
-        $answer->answer = $request->input('answer');
-        $answer->correct = $request->input('correct');
-        $answer->definition = $request->input('definition');
-        $answer->save();
+        $question = Question::findOrFail($id);
+        $question->question = $request->input('question');
+        $question->question_number = $request->input('question_number');
+        $question->is_review = $request->input('is_review');
+        $question->is_broker = $request->input('is_broker');
+        $question->problem_notification = $request->input('problem_notification');
+        $question->save();
 
         return redirect()
-            ->route('admin.exam-question.edit', $answer->question->id)
-            ->with('flash_message',  'Answer updated');
+            ->route('admin.exam-answer.index', $question->id )
+            ->with('flash_message',  'Question updated');
     }
 
     /**

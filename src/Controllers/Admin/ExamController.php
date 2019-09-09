@@ -1,10 +1,11 @@
 <?php
 
-namespace LucasQuinnGuru\SitetronicExam\Controllers;
+namespace LucasQuinnGuru\SitetronicExam\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use LucasQuinnGuru\SitetronicExam\Controllers\Controller;
 
-class ExamAdminController extends Controller
+class ExamController extends Controller
 {
     public function __construct()
     {
@@ -22,7 +23,7 @@ class ExamAdminController extends Controller
     public function index()
     {
         //Get all users and pass it to the view
-        return view('sitetronic-exam::exam-admin.index')->with('');
+        return view('sitetronic-exam::admin.exam.index')->with('');
     }
 
     /**

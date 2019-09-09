@@ -1,22 +1,26 @@
 <?php
 
-namespace LucasQuinnGuru\SitetronicExam\Controllers;
+namespace LucasQuinnGuru\SitetronicExam\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use LucasQuinnGuru\SitetronicExam\Controllers\Controller;
 use LucasQuinnGuru\SitetronicExam\Models\Section;
+use LucasQuinnGuru\SitetronicExam\Models\Topic;
 
-class ExamSectionAdminController extends Controller
+class ExamTopicController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Section $section)
     {
         //Get all users and pass it to the view
-        $sections = Section::all();
-        return view('sitetronic-exam::section-admin.index')->with('sections', $sections);
+        $topics = $section->topics;
+        return view('sitetronic-exam::admin.topic.index')
+            ->with('topics', $topics)
+            ->with('section', $section );
     }
 
     /**
@@ -24,9 +28,10 @@ class ExamSectionAdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create( Section $section)
     {
-        return view('sitetronic-exam::section-admin.create');
+        return view('sitetronic-exam::admin.topic.create')
+            ->with('section', $section );;
     }
 
     /**
@@ -35,21 +40,23 @@ class ExamSectionAdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Section $section)
     {
         $this->validate($request, [
             'name'=>'required',
             'active'=>'required'
         ]);
 
-        $section = new Section();
-        $section->name = $request->name;
-        $section->active = $request->active;
-        $section->save();
+        $topic = new Topic();
+        $topic->section_id = $section->id;
+        $topic->name = $request->name;
+        $topic->active = $request->active;
+        $topic->save();
 
         return redirect()
-            ->route('admin.exam-section.index' )
-            ->with('flash_message',  'Section: '. $section->name . ' added');
+            ->route('admin.exam-section.edit', $section->id)
+            ->with('flash_message',  'Topic: '. $topic->name . ' added');
+
     }
 
     /**
@@ -60,8 +67,7 @@ class ExamSectionAdminController extends Controller
      */
     public function show($id)
     {
-        return redirect()
-            ->route('admin.exam-section.edit', $id);
+        //
     }
 
     /**
@@ -72,9 +78,11 @@ class ExamSectionAdminController extends Controller
      */
     public function edit($id)
     {
-        $section = Section::findOrFail($id); //Get user with specified id
+        $topic = Topic::findOrFail($id); //Get user with specified id
+        $section = $topic->section;
+        $questions = $topic->questions()->orderBy('question_number')->get();
 
-        return view( 'sitetronic-exam::section-admin.edit', compact('section') ); //pass user and roles data to view
+        return view('sitetronic-exam::admin.topic.edit', compact('topic', 'section', 'questions' )); //pass user and roles data to view
     }
 
     /**
@@ -91,14 +99,14 @@ class ExamSectionAdminController extends Controller
             'active'=>'required'
         ]);
 
-        $section = Section::findOrFail($id);
-        $section->name = $request->input('name');
-        $section->active = $request->input('active');
-        $section->save();
+        $topic = Topic::findOrFail($id);
+        $topic->name = $request->input('name');
+        $topic->active = $request->input('active');
+        $topic->save();
 
         return redirect()
-            ->route('admin.exam-topic.index', $section->id)
-            ->with('flash_message',  'Section: '. $section->name . ' updated');
+            ->route('admin.exam-question.index', $topic->id)
+            ->with('flash_message',  'Topic: '. $topic->name . ' updated');
     }
 
     /**
@@ -109,11 +117,6 @@ class ExamSectionAdminController extends Controller
      */
     public function destroy($id)
     {
-        $section = Section::findOrFail($id);
-        $section->delete();
-
-        return redirect()
-            ->route('admin.exam-section.index')
-            ->with('flash_message', 'Section successfully deleted');
+        //
     }
 }
