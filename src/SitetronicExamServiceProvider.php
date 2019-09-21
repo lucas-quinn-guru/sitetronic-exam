@@ -8,7 +8,11 @@ class SitetronicExamServiceProvider extends ServiceProvider
 {
 
     protected $commands = [
-        'LucasQuinnGuru\SitetronicExam\Commands\SeedRolesAndPermissionsCommand'
+        'LucasQuinnGuru\SitetronicExam\Commands\SeedRolesAndPermissionsCommand',
+        'LucasQuinnGuru\SitetronicMisc\Commands\SeedSectionsCommand',
+        'LucasQuinnGuru\SitetronicMisc\Commands\SeedTopicsCommand',
+        'LucasQuinnGuru\SitetronicMisc\Commands\SeedQuestionsCommand',
+        'LucasQuinnGuru\SitetronicMisc\Commands\SeedAnswersCommand',
     ];
 
     /**
