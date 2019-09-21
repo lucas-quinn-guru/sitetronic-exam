@@ -9,10 +9,10 @@ class SitetronicExamServiceProvider extends ServiceProvider
 
     protected $commands = [
         'LucasQuinnGuru\SitetronicExam\Commands\SeedRolesAndPermissionsCommand',
-        'LucasQuinnGuru\SitetronicMisc\Commands\SeedSectionsCommand',
-        'LucasQuinnGuru\SitetronicMisc\Commands\SeedTopicsCommand',
-        'LucasQuinnGuru\SitetronicMisc\Commands\SeedQuestionsCommand',
-        'LucasQuinnGuru\SitetronicMisc\Commands\SeedAnswersCommand',
+        'LucasQuinnGuru\SitetronicExam\Commands\SeedSectionsCommand',
+        'LucasQuinnGuru\SitetronicExam\Commands\SeedTopicsCommand',
+        'LucasQuinnGuru\SitetronicExam\Commands\SeedQuestionsCommand',
+        'LucasQuinnGuru\SitetronicExam\Commands\SeedAnswersCommand',
     ];
 
     /**
