@@ -1,6 +1,6 @@
 <?php
 
-namespace LucasQuinnGuru\SitetronicMisc\Commands;
+namespace LucasQuinnGuru\SitetronicExam\Commands;
 
 use Illuminate\Console\Command;
 
